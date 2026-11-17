@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- Launchscore demo. Deterministic: render frame at time t with ?t=<seconds>. Built from a real run on examples/before → examples/after. -->
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1200px;height:680px;background:#0b0d12;overflow:hidden}
+.win{position:absolute;inset:28px;border-radius:14px;background:#161a22;border:1px solid #2a303c;overflow:hidden}
+.bar{height:44px;display:flex;align-items:center;padding:0 20px;gap:8px;border-bottom:1px solid #222836}
+.bar span{width:13px;height:13px;border-radius:50%}
+.bar b{margin-left:auto;margin-right:auto;font:500 16px "Segoe UI",system-ui,sans-serif;color:#7f8ea3;transform:translateX(-30px)}
+.term{position:absolute;left:30px;right:30px;top:58px;bottom:16px;overflow:hidden}
+#out{position:absolute;left:0;right:0;font:21px/1.5 "Cascadia Code",Consolas,monospace;color:#e6e8ee;white-space:pre}
+.p{color:#7f8ea3}.g{color:#a6e3a1}.r{color:#ff7b72}.y{color:#f9c97a}.o{color:#ff8a4c}.m{color:#7f8ea3}.b{font-weight:700}.c{color:#8ec8ff}
+.cur{display:inline-block;width:11px;height:22px;background:#e6e8ee;vertical-align:-3px}
+</style></head><body>
+<div class="win"><div class="bar"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span><b>~/projects/jsonpeek</b></div>
+<div class="term"><div id="out"></div></div></div>
+<script>
+const t = parseFloat(new URLSearchParams(location.search).get("t") ?? "99");
+const LINE_H = 31.5, VISIBLE = 17;
+// [startTime, html, typed?]  typed lines reveal char by char after the prompt
+const S = (s) => s;
+const script = [
+  [0.3, '<span class="p">$</span> ', "node launchscore/audit.mjs ."],
+  [1.9, ''],
+  [1.9, '  <span class="b">🚀 Launch Score</span>  <span class="r b">21/100</span>  <span class="r">████</span><span class="m">░░░░░░░░░░░░░░░░</span>  <span class="r">Not launch-ready</span>'],
+  [2.0, '  <span class="y">▲</span> One-liner               <span class="m">42 words: "This project is a small tool that…"</span>'],
+  [2.1, '  <span class="r">✘</span> Demo above the fold'],
+  [2.2, '  <span class="r">✘</span> Copy-paste quick start'],
+  [2.3, '  <span class="r">✘</span> Examples · Why · License · Contributing'],
+  [3.6, ''],
+  [3.8, '<span class="o b">you ›</span> ', "launch this repo"],
+  [5.0, ''],
+  [5.2, '  <span class="g">●</span> <span class="b">Positioning</span>  <span class="c">"See the shape of any JSON file in one second."</span>'],
+  [5.8, '  <span class="g">●</span> <span class="b">README</span>       rewritten: demo → quick start → why → comparison'],
+  [6.4, '  <span class="g">●</span> <span class="b">Assets</span>       docs/demo.png rendered'],
+  [7.0, '  <span class="g">●</span> <span class="b">Files</span>        + LICENSE (MIT)  + CONTRIBUTING.md'],
+  [8.6, ''],
+  [8.8, '<span class="p">$</span> ', "node launchscore/audit.mjs ."],
+  [10.4, ''],
+  [10.4, '  <span class="b">🚀 Launch Score</span>  <span class="g b">96/100</span>  <span class="g">███████████████████</span><span class="m">░</span>  <span class="g">Ready to launch</span>'],
+  [10.5, '  <span class="g">✔</span> One-liner               <span class="m">"See the shape of any JSON file in one second."</span>'],
+  [10.6, '  <span class="g">✔</span> Demo above the fold     <span class="m">docs/demo.png</span>'],
+  [10.7, '  <span class="g">✔</span> Copy-paste quick start  <span class="m">npx jsonpeek response.json</span>'],
+  [10.8, '  <span class="g">✔</span> Examples · Why · License · Contributing'],
+];
+const CPS = 22; // typing speed
+let html = [], cursorLine = -1, lastTyped = null;
+for (const [start, prefix, typed] of script) {
+  if (t < start) break;
+  if (typed !== undefined) {
+    const n = Math.min(typed.length, Math.floor((t - start) * CPS));
+    html.push(prefix + typed.slice(0, n));
+    lastTyped = { idx: html.length - 1, done: n >= typed.length, start, len: typed.length };
+  } else html.push(prefix);
+}
+// cursor: after the last typed line while typing, or on a fresh prompt at the end
+const blink = Math.floor(t * 2) % 2 === 0;
+if (lastTyped && (!lastTyped.done || html.length - 1 === lastTyped.idx)) {
+  if (blink || !lastTyped.done) html[lastTyped.idx] += '<span class="cur"></span>';
+} else if (t > 12) {
+  html.push('<span class="p">$</span> ' + (blink ? '<span class="cur"></span>' : ''));
+}
+const out = document.getElementById("out");
+out.innerHTML = html.join("\n");
+const overflow = Math.max(0, html.length - VISIBLE);
+out.style.top = (-overflow * LINE_H) + "px";
+</script></body></html>

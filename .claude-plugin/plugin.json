@@ -1,0 +1,9 @@
+{
+  "name": "launchscore",
+  "description": "Launch any repo like a pro: launch-readiness score, README rewrite, demo GIF, social preview, and channel-native posts for Hacker News, Reddit, X and more.",
+  "version": "0.1.0",
+  "author": { "name": "ikooq" },
+  "homepage": "https://github.com/ikooq/launchscore",
+  "license": "MIT",
+  "keywords": ["launch", "open-source", "readme", "marketing", "hacker-news", "github-stars", "skill"]
+}

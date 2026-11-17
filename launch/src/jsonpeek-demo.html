@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1200px;height:620px;background:#0b0d12;overflow:hidden}
+.win{margin:30px;height:560px;border-radius:14px;background:#161a22;border:1px solid #2a303c;font:22px/1.45 "Cascadia Code",Consolas,monospace;color:#e6e8ee;padding:22px 30px;box-sizing:border-box}
+.dots span{display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:8px}
+pre{margin:16px 0 0;font:inherit;white-space:pre}
+.p{color:#7f8ea3}.k{color:#8ec8ff}.t{color:#a6e3a1}.n{color:#f9c97a}
+</style></head><body><div class="win">
+<div class="dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+<pre><span class="p">$</span> npx jsonpeek sample.json
+sample.json: <span class="t">object</span>
+├─ <span class="k">user</span>: <span class="t">object</span>
+│  ├─ <span class="k">id</span>: <span class="t">number</span>
+│  ├─ <span class="k">name</span>: <span class="t">string</span>
+│  └─ <span class="k">tags</span>: <span class="n">array[2]</span>
+│     └─ [0]: <span class="t">string</span>
+├─ <span class="k">orders</span>: <span class="n">array[1]</span>
+│  └─ [0]: <span class="t">object</span>
+│     ├─ <span class="k">id</span>: <span class="t">number</span>
+│     └─ <span class="k">items</span>: <span class="n">array[1]</span>
+└─ <span class="k">meta</span>: <span class="t">null</span></pre>
+</div></body></html>

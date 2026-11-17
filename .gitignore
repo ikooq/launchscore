@@ -1,0 +1,10 @@
+# Private launch drafts (kept locally, not published)
+launch/posts/
+launch/plan.md
+launch/faq.md
+launch/positioning.md
+launch/audit.json
+examples/*/jsonpeek/launch/
+
+node_modules/
+.DS_Store

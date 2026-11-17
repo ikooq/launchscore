@@ -1,0 +1,11 @@
+{
+  "name": "launchscore",
+  "owner": { "name": "ikooq" },
+  "plugins": [
+    {
+      "name": "launchscore",
+      "source": "./",
+      "description": "Launch any repo like a pro: launch-readiness score, README rewrite, demo GIF, social preview, and channel-native launch posts."
+    }
+  ]
+}

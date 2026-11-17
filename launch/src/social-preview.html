@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Social preview</title>
+<style>
+  /* Render at exactly 1280x640. Replace {{...}} placeholders and colors. */
+  :root {
+    --bg: #0b0d12;
+    --fg: #f5f6f8;
+    --muted: #9aa3b2;
+    --accent: #ff6b35;
+    --code-bg: #161a22;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    background:
+      radial-gradient(900px 500px at 85% 15%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+      var(--bg);
+    color: var(--fg);
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 110px;
+  }
+  .name { font-size: 44px; font-weight: 700; color: var(--accent); letter-spacing: -0.5px; }
+  .one-liner { margin-top: 18px; font-size: 68px; font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; max-width: 1000px; }
+  .cmd {
+    margin-top: 44px; display: inline-block; align-self: flex-start;
+    font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace; font-size: 30px;
+    background: var(--code-bg); color: var(--fg); padding: 18px 28px; border-radius: 14px;
+    border: 1px solid #2a303c;
+  }
+  .cmd::before { content: "$ "; color: var(--muted); }
+  .footer { position: absolute; bottom: 48px; left: 110px; font-size: 24px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="name">launchscore</div>
+  <div class="one-liner">Your coding agent launches your repo like a pro.</div>
+  <div class="cmd">npx skills add ikooq/launchscore</div>
+  <div class="footer">github.com/ikooq/launchscore · open source · MIT</div>
+</body>
+</html>

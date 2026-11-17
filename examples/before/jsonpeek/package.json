@@ -1,0 +1,6 @@
+{
+  "name": "jsonpeek",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": { "jsonpeek": "index.js" }
+}
