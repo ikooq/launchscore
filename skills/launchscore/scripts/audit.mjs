@@ -124,9 +124,14 @@ check("links", 6, "No broken relative links/images in README", () => {
 // ---------- GitHub checks (need gh + GitHub remote) ----------
 let gh = null;
 let ghReason = "";
-const remote = safe(() => run("git", ["remote", "get-url", "origin"]), "");
+// A folder inside another repo must not inherit that repo's GitHub metadata.
+const sameDir = (a, b) => process.platform === "win32" ? a.toLowerCase() === b.toLowerCase() : a === b;
+const top = safe(() => resolve(run("git", ["rev-parse", "--show-toplevel"])), "");
+const isRoot = top && sameDir(top, repo);
+const remote = isRoot ? safe(() => run("git", ["remote", "get-url", "origin"]), "") : "";
 const slug = (remote.match(/github\.com[:/]([^/]+\/[^/.\s]+?)(\.git)?$/) || [])[1];
-if (!slug) ghReason = "no GitHub remote";
+if (top && !isRoot) ghReason = "folder is inside another git repo, not its root";
+else if (!slug) ghReason = "no GitHub remote";
 else {
   gh = safe(() => JSON.parse(run("gh", ["repo", "view", slug, "--json",
     "description,homepageUrl,repositoryTopics,stargazerCount,hasIssuesEnabled,latestRelease,usesCustomOpenGraphImage,isPrivate"])), null);
