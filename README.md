@@ -91,7 +91,9 @@ Everything lands in a `launch/` folder you review. **Launchscore never posts, vo
 
 Calibration: well-launched repos score high — [`sharkdp/bat`](https://github.com/sharkdp/bat) (61k★) scores **97**.
 
-16 checks across the README, repo files and GitHub metadata (description, topics, homepage, social preview, releases, good first issues). GitHub checks use the `gh` CLI if it's logged in and are skipped otherwise. Zero dependencies, Node ≥ 18.
+17 checks across the README, repo files and GitHub metadata (description, topics, homepage, social preview, releases, good first issues, a red CI badge in the README). GitHub checks use the `gh` CLI if it's logged in and are skipped otherwise. Zero dependencies, Node ≥ 18.
+
+Show your score in your own README: `node skills/launchscore/scripts/audit.mjs --badge` prints a ready-to-paste shields.io badge, like ![Launch Score](https://img.shields.io/badge/launch%20score-96%2F100-brightgreen).
 
 ## Honest by design
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Launchscore launch-readiness audit. Zero dependencies, Node >= 18.
-// Usage: node audit.mjs [repo-path] [--json] [--no-write]
+// Usage: node audit.mjs [repo-path] [--json] [--badge] [--no-write]
+//   --badge  print only a Markdown shields.io badge with the score, for pasting into a README
 
 import { readFileSync, existsSync, readdirSync, mkdirSync, writeFileSync } from "node:fs";
 import { join, resolve, dirname, basename, relative } from "node:path";
@@ -165,6 +166,24 @@ ghCheck("good_first_issues", 4, "'good first issue' issues open", (g) => {
     : { status: n ? "warn" : "fail", score: n / 3, note: `${n} open`, fix: "Open 3–5 small issues labeled 'good first issue'." };
 });
 
+// A red CI badge on the first screen hurts more than no badge. Neutral (skipped) when there is no badge.
+ghCheck("ci_badge", 4, "CI badge in README is green", () => {
+  const badges = [...readme.matchAll(/github\.com\/([\w.-]+\/[\w.-]+)\/actions\/workflows\/([\w.-]+)\/badge\.svg(?:\?([^)"'\s]*))?/g)];
+  if (!badges.length) return { status: "skipped", note: "no Actions badge in README" };
+  const red = [];
+  for (const [, repoSlug, workflow, query = ""] of badges) {
+    const branch = new URLSearchParams(query.replace(/&amp;/g, "&")).get("branch");
+    const runArgs = ["run", "list", "-R", repoSlug, "--workflow", workflow, "--limit", "1", "--json", "conclusion"];
+    if (branch) runArgs.push("--branch", branch);
+    const last = safe(() => JSON.parse(run("gh", runArgs))[0], null);
+    if (last && ["failure", "timed_out", "startup_failure"].includes(last.conclusion)) red.push(`${workflow}${branch ? `@${branch}` : ""}`);
+  }
+  return red.length
+    ? { status: "warn", score: 0.25, note: `last run failed: ${red.join(", ")}`,
+        fix: `The CI badge in the README is red (${red.join(", ")}): fix the workflow, or remove the badge until it is green.` }
+    : { status: "pass", note: `${badges.length} badge(s)` };
+});
+
 // ---------- score ----------
 const scoreOf = (c) => (c.status === "pass" ? 1 : c.status === "warn" ? (c.score ?? 0.5) : 0);
 const scored = checks.filter((c) => c.status !== "skipped");
@@ -189,7 +208,13 @@ if (write) {
   safe(() => { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, JSON.stringify(result, null, 2)); }, null);
 }
 
-if (asJson) {
+// shields.io static badge, e.g. ![Launch Score](https://img.shields.io/badge/launch%20score-96%2F100-brightgreen)
+const badgeColor = score >= 90 ? "brightgreen" : score >= 75 ? "green" : score >= 50 ? "yellow" : "red";
+const badge = `![Launch Score](https://img.shields.io/badge/launch%20score-${score}%2F100-${badgeColor})`;
+
+if (flags.has("--badge")) {
+  console.log(badge);
+} else if (asJson) {
   console.log(JSON.stringify(result, null, 2));
 } else {
   const tty = process.stdout.isTTY;
@@ -207,6 +232,7 @@ if (asJson) {
     console.log(`\n  Top fixes:`);
     fixes.slice(0, 5).forEach((f, i) => console.log(`  ${i + 1}. [+${f.impact}] ${f.fix}`));
   }
-  if (result.skipped.length) console.log(c(90, `\n  Skipped GitHub checks (${ghReason}). Score is out of the checks that ran.`));
+  if (ghReason && result.skipped.length) console.log(c(90, `\n  Skipped GitHub checks (${ghReason}). Score is out of the checks that ran.`));
+  console.log(c(90, `\n  README badge: ${badge}`));
   console.log("");
 }

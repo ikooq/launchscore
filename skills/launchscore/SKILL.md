@@ -32,7 +32,9 @@ node <this-skill-dir>/scripts/audit.mjs <repo-path>
 
 It prints a **Launch Score /100** with a per-check breakdown and writes `launch/audit.json`. Show the user the score and the top 3 fixes. Re-run it at the end to show the improvement — the before/after is motivating and shareable.
 
-If `gh` is authenticated and the repo has a GitHub remote, the script also checks description, topics, homepage and stars. If not, those checks are marked `skipped`, not failed.
+If `gh` is authenticated and the repo has a GitHub remote, the script also checks description, topics, homepage, social preview, releases, good first issues and whether a GitHub Actions badge in the README is red. If not, those checks are marked `skipped`, not failed.
+
+`--badge` prints only a Markdown shields.io badge with the score; offer it once the score is 75 or higher.
 
 ### Phase 2 — Positioning
 
