@@ -28,6 +28,19 @@ Universal rules: say you're the author · link the repo/demo · never ask for up
 - Post to 2–4 relevant subs spread over 1–2 days, each text adapted. Don't cross-post the same text simultaneously.
 - Good fits by audience: r/programming (strict, link posts, technical depth), r/opensource, r/selfhosted, r/commandline, r/webdev, r/SideProject, r/ClaudeAI, r/LocalLLaMA, r/ChatGPTCoding, language subs (r/rust, r/golang, r/Python, r/javascript…).
 
+## Lobsters
+
+A small, invite-only link site focused narrowly on computing. Source: [lobste.rs/about](https://lobste.rs/about), [the `show` tag](https://lobste.rs/t/show).
+
+- **Invite-only.** Accounts come from invitations (spam control). Ask someone you recognise from the site, or the chat; the inviter is public in the user tree.
+- **New accounts can't launch.** For the first 70 days a user can't submit self-promo, can't use the `show` tag and can't submit links to domains the site hasn't seen. Only post your project from an account that has been taking part.
+- **Self-promo is a minority of your activity.** Rule of thumb from the about page: less than a quarter of your stories and comments in the last year. Authors are welcome, but not as "a write-only tool for product announcements".
+- **Tag it `show`** ("Show Lobsters / Projects"), plus the technical tags that fit. Tags come from a fixed list.
+- **Topic test:** "Will this improve the reader's next program?" Link the repo or a technical write-up; business news, careers and marketing are off-topic.
+- **Clean link:** tracking parameters are stripped and marketing-analytics domains are banned.
+- **Title:** there is no written rule, but members can suggest edits (e.g. dropping the site name), so use a plain descriptive title like on HN.
+- **Tone:** "more of a garden party than a debate club". Answer comments; don't argue with flags.
+
 ## X (Twitter)
 
 - **Tweet 1:** the hook + the demo video/GIF attached natively (native video gets far more reach than links). Link in the first reply or at the end, not necessarily tweet 1.
@@ -53,6 +66,16 @@ Universal rules: say you're the author · link the repo/demo · never ask for up
 
 - Find 5–15 channels in the niche (AI tools, dev, open source). Many admins post interesting projects for free.
 - Message: 3–4 lines — what it is, one-liner, GIF, link. Personal, not a mass mailing. Respect a "no".
+
+## Zenn / Qiita (Japanese-speaking developers)
+
+Article platforms for technical knowledge, not link boards. Sources: [Qiita community guideline](https://help.qiita.com/ja/articles/qiita-community-guideline), [Qiita article guideline](https://help.qiita.com/ja/articles/qiita-article-guideline), [Zenn guideline](https://zenn.dev/guideline), [Zenn Tech or Idea](https://zenn.dev/tech-or-idea), [Zenn terms](https://zenn.dev/terms).
+
+- **An announcement alone counts as advertising.** Qiita: no articles whose main purpose is promotion or sales, but a technical explanation of your own product is not promotion. Zenn: avoid posts whose main purpose is promoting a product; keep promotion to a fixed message at the end of the article.
+- **Zenn category:** pick **Tech** for architecture and internals, **Idea** for introducing a service ("○○というサービスを作りました"). A Tech deep-dive that happens to be about your tool is the strongest launch post.
+- **What readers expect:** first-hand experience, the target reader, versions and prerequisites, honest limits. A specific title; both sites warn against clickbait or sensational (煽り) titles.
+- **AI-written text:** allowed on both, but verify it before posting; Zenn asks not to mass-produce articles, and its terms list machine-generated text and repeated identical posts as spam. Write the article in Japanese for these readers (or have a native speaker review it) rather than pasting a translated README.
+- **Tags (Qiita):** tags make articles findable; you can add versions, e.g. `Ruby:2.2`.
 
 ## dev.to / Medium / Hashnode / LinkedIn
 
@@ -109,4 +132,30 @@ I'm the author — happy to answer anything, and criticism is very welcome.
 4/ The part I'm proudest of: <surprising detail>
 5/ It's open source (MIT). Try it: <one command>
    <link>
+```
+
+### Zenn Tech / Qiita article outline (Japanese)
+
+Fill in every `<…>`; keep the technical part the longest section.
+
+```
+タイトル: <ツール名>の仕組み: <技術的な工夫を一言で>
+
+## この記事について
+対象読者: <誰向けか>。検証環境: <OS、言語やランタイムのバージョン>。
+
+## 作ったきっかけ
+<自分が困っていたこと、1〜2文>
+
+## 仕組み
+<アーキテクチャや内部実装。コードや図を添える>
+
+## 使ってみる
+    <1〜3行のインストールと実行コマンド>
+
+## まだできないこと
+<正直な制限を1〜2点>
+
+---
+<ツール名>はMITライセンスで公開しています: <リポジトリのURL>
 ```

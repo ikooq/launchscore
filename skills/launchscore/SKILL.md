@@ -1,6 +1,6 @@
 ---
 name: launchscore
-description: Prepare and launch an open-source repository so people actually discover and star it. Use when the user wants to launch, promote, publish, "get stars", go viral, post to Hacker News / Reddit / X / Product Hunt / Habr, improve a README for conversion, make a demo GIF or social preview image, or asks "why does nobody star my repo?". Scores launch readiness, rewrites the README, produces visual assets, sets repo metadata, and writes channel-native launch posts plus a launch-day plan.
+description: Prepare and launch an open-source repository so people actually discover and star it. Use when the user wants to launch, promote, publish, "get stars", go viral, post to Hacker News / Reddit / X / Product Hunt / Lobsters / Habr / Zenn / Qiita, improve a README for conversion, make a demo GIF or social preview image, or asks "why does nobody star my repo?". Scores launch readiness, rewrites the README, produces visual assets, sets repo metadata, and writes channel-native launch posts plus a launch-day plan.
 ---
 
 # Launchscore — launch a repo so it gets discovered

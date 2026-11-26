@@ -51,7 +51,7 @@ Great projects die with 3 stars every day. Not because the code is bad — becau
 - **Know where you stand** — a 0–100 Launch Score with the exact fixes ranked by impact.
 - **A README that converts** — demo first, one-liner, 3-line quick start, honest comparison.
 - **Assets people share** — a scripted demo GIF and a 1280×640 social preview card.
-- **Posts that fit each channel** — Show HN with first comment, Reddit, X thread, Product Hunt, Habr — plus a FAQ for the skeptics.
+- **Posts that fit each channel** — Show HN with first comment, Reddit, X thread, Product Hunt, Lobsters, Habr, Zenn/Qiita — plus a FAQ for the skeptics.
 - **A launch-day plan** hour by hour, built around how GitHub Trending actually works.
 
 ## What it does
@@ -113,7 +113,8 @@ Launchscore will not help you buy stars, trade stars, or ask people to upvote. T
 
 - [ ] `launchscore badge` — Launch Score badge for your README
 - [ ] Post-launch report from GitHub traffic (referrers → what worked)
-- [ ] More channels: Lobsters, Hashnode, Zhihu, Qiita
+- [x] Lobsters, Zenn and Qiita
+- [ ] More channels: Hashnode, Zhihu
 - [ ] Localized posts (ES, PT, ZH, RU, JA)
 
 ## Contributing
